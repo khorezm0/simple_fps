@@ -65,6 +65,14 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Strafe"",
+                    ""type"": ""Value"",
+                    ""id"": ""da1814fc-9343-46a0-86f3-63f1804423e6"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -280,7 +288,7 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bc27b1de-4cbf-482a-b122-f4c13eda54cc"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -309,6 +317,28 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b789c4d-03b4-4e66-b025-c5b7c72f14c3"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Strafe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a77c18b-212f-4bdd-9c1a-62827171f14d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Strafe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -323,6 +353,7 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         m_MainMap_Interact = m_MainMap.FindAction("Interact", throwIfNotFound: true);
         m_MainMap_Reload = m_MainMap.FindAction("Reload", throwIfNotFound: true);
         m_MainMap_Jump = m_MainMap.FindAction("Jump", throwIfNotFound: true);
+        m_MainMap_Strafe = m_MainMap.FindAction("Strafe", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,6 +409,7 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_MainMap_Interact;
     private readonly InputAction m_MainMap_Reload;
     private readonly InputAction m_MainMap_Jump;
+    private readonly InputAction m_MainMap_Strafe;
     public struct MainMapActions
     {
         private @DefaultInputs m_Wrapper;
@@ -388,6 +420,7 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_MainMap_Interact;
         public InputAction @Reload => m_Wrapper.m_MainMap_Reload;
         public InputAction @Jump => m_Wrapper.m_MainMap_Jump;
+        public InputAction @Strafe => m_Wrapper.m_MainMap_Strafe;
         public InputActionMap Get() { return m_Wrapper.m_MainMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -415,6 +448,9 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_MainMapActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_MainMapActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_MainMapActionsCallbackInterface.OnJump;
+                @Strafe.started -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
+                @Strafe.performed -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
+                @Strafe.canceled -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
             }
             m_Wrapper.m_MainMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -437,6 +473,9 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Strafe.started += instance.OnStrafe;
+                @Strafe.performed += instance.OnStrafe;
+                @Strafe.canceled += instance.OnStrafe;
             }
         }
     }
@@ -449,5 +488,6 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnStrafe(InputAction.CallbackContext context);
     }
 }

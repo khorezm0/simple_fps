@@ -10,6 +10,7 @@ public class InputsController : MonoBehaviour
     public float reload;
     public float interact;
     public float jump;
+    public float strafe;
 
     public void OnMove(InputValue value)
     {
@@ -39,5 +40,10 @@ public class InputsController : MonoBehaviour
     public void OnJump(InputValue context)
     {
         jump = context.Get<float>();
+    }
+
+    public void OnStrafe(InputValue context)
+    {
+        strafe = context.Get<float>();
     }
 }

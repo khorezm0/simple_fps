@@ -15,6 +15,6 @@ public class LocalPlayerInputs : MonoBehaviour
 
     private void LateUpdate()
     {
-        _movementController.UpdateMovement(new Vector2(inputs.look.x, -1 * inputs.look.y), inputs.move, inputs.jump, Time.deltaTime);
+        _movementController.UpdateMovement(new Vector2(inputs.look.x, -1 * inputs.look.y), inputs.move, inputs.jump, inputs.strafe > 0.1f, Time.deltaTime);
     }
 }

@@ -12,6 +12,7 @@ public class CharacterMovementController : MonoBehaviour
     //PHYSICS
 
     public float moveSpeed = 5;
+    public float strafeSpeed = 9;
     public float airMoveDrag = 0.4f;
     public float lookSpeed = 5;
     public float lookSmooth = 4;
@@ -56,10 +57,10 @@ public class CharacterMovementController : MonoBehaviour
         }
     }
 
-    public void UpdateMovement(Vector2 lookInput, Vector2 moveInput, float jump, float deltaTime)
+    public void UpdateMovement(Vector2 lookInput, Vector2 moveInput, float jump, bool strafe, float deltaTime)
     {
         Look(lookInput, deltaTime);
-        Move(moveInput, deltaTime);
+        Move(moveInput, strafe, deltaTime);
         Jump(jump, deltaTime);
 
         if (_groundedCheckTimer == groundedCheckTime)
@@ -84,9 +85,13 @@ public class CharacterMovementController : MonoBehaviour
         _transform.localRotation = Quaternion.Slerp(_transform.localRotation, _rotY, lookSmooth * deltaTime);
     }
 
-    private void Move(Vector2 moveInput, float deltaTime)
+    private void Move(Vector2 moveInput, bool strafe, float deltaTime)
     {
-        var moveDir = _transform.TransformDirection(new Vector3(moveInput.x, 0, moveInput.y)).normalized * moveSpeed;
+        float speed;
+        if (strafe) speed = strafeSpeed;
+        else speed = moveSpeed;
+
+        var moveDir = _transform.TransformDirection(new Vector3(moveInput.x, 0, moveInput.y)).normalized * speed;
         if (!_isGrounded)
         {
             moveDir *= airMoveDrag;
@@ -102,6 +107,7 @@ public class CharacterMovementController : MonoBehaviour
         {
             _jumpPressed = true;
             _velocity.y = jumpHeight;
+            _collider.material = noFrictionMaterial;
         }
 
         if (!_isGrounded && _jumpPressed)
@@ -115,7 +121,17 @@ public class CharacterMovementController : MonoBehaviour
         _rigidbody.velocity = _velocity;
         if (!_isGrounded)
         {
-            _velocity += Physics.gravity * gravityMultiplayer * Time.fixedDeltaTime;
+            var fallMultiplayer = 1;
+            if (_velocity.y < 0)
+            {
+                //make falling more crispy)
+                fallMultiplayer = 2;
+            }
+            _velocity += Physics.gravity * gravityMultiplayer * fallMultiplayer * Time.fixedDeltaTime;
+            _collider.material = noFrictionMaterial;
+        }
+        else if (_jumpPressed)
+        {
             _collider.material = noFrictionMaterial;
         }
         else if (!_jumpPressed)

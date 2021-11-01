@@ -10,9 +10,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         Time.fixedDeltaTime = 0.005f;
-    }
-
-    private void Update()
-    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
