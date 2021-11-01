@@ -56,13 +56,14 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_project\scripts\Game.cs" />
+    <Compile Include="Assets\_project\scripts\Controllers\LocalPlayerInputs.cs" />
+    <Compile Include="Assets\_project\scripts\Controllers\CharacterMovementController.cs" />
     <Compile Include="Assets\_project\scripts\Controllers\InputsController.cs" />
     <Compile Include="Assets\_project\inputs\DefaultInputs.cs" />
-    <Compile Include="Assets\_project\scripts\Controllers\CharacterMovementController.cs" />
-    <Compile Include="Assets\_project\scripts\Controllers\LocalPlayerInputs.cs" />
+    <Compile Include="Assets\_project\scripts\Game.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\_project\fonts\UFL.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
