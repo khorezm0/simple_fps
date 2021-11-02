@@ -7,12 +7,12 @@
 - Character controller based on Rigidbody
 
 ##Game features
-- Weapon animation when moving, falling (currently not realized)
-- Weapon shooting: Shoot, Raycast, Reload, Hit point decals  (currently not realized)
-- Weapons Inventory (currently not realized)
-- Weapon Zooming  (currently not realized)
-- Walk, Strafe, Jump
-- Menu: Pause, Graphics settings, Inputs settings, Audio settings  (currently not realized)
+- Walk, Strafe, Jump, Look
+- Weapon animation when moving, falling (currently not implemented)
+- Weapon shooting: Shoot, Raycast, Reload, Hit point decals  (currently not implemented)
+- Weapons Inventory (currently not implemented)
+- Weapon Zooming  (currently not implemented)
+- Menu: Pause, Graphics settings, Inputs settings, Audio settings  (currently not implemented)
 
 ##Goal 
 Trying my best to make great looking code :)
