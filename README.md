@@ -3,7 +3,7 @@
 Main features
 - Simple and well structured code design
 - Reusable code
-- Integrated New Input System, so in future player can change keys
+- Integrated new Input System, so in future player can change keys mapping
 - Character controller based on Rigidbody
 
 Game features
