@@ -25,6 +25,7 @@ Goal
 - [Icons from Game-Icons.net (CC-BY License)](https://game-icons.net/)
 - [Prototype Textures Pack](https://assetstore.unity.com/packages/2d/textures-materials/prototype-textures-pack-191050)
 - [Low Poly Weapons](https://assetstore.unity.com/packages/3d/props/guns/low-poly-weapons-vol-1-151980)
+- [Distant Lands Free Characters](https://assetstore.unity.com/packages/3d/characters/distant-lands-free-characters-178123)
 
 # Contribute
 - Feel free to make an issues with fixes and/or new ideaas
