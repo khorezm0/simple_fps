@@ -1,12 +1,12 @@
 # Simple FPS
 
-##Main features
+Main features
 - Simple and well structured code design
 - Reusable code
 - Integrated New Input System, so in future player can change keys
 - Character controller based on Rigidbody
 
-##Game features
+Game features
 - Walk, Strafe, Jump, Look
 - Weapon animation when moving, falling (currently not implemented)
 - Weapon shooting: Shoot, Raycast, Reload, Hit point decals  (currently not implemented)
@@ -14,7 +14,7 @@
 - Weapon Zooming  (currently not implemented)
 - Menu: Pause, Graphics settings, Inputs settings, Audio settings  (currently not implemented)
 
-##Goal 
+Goal 
 Trying my best to make great looking code :)
 
 # Dependencies
