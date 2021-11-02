@@ -62,6 +62,9 @@
     <Compile Include="Assets\_project\inputs\DefaultInputs.cs" />
     <Compile Include="Assets\_project\scripts\Game.cs" />
     <Compile Include="Assets\_project\scripts\Controllers\WeaponController.cs" />
+    <Compile Include="Assets\_project\scripts\Controllers\CharacterAnimationController.cs" />
+    <Compile Include="Assets\_project\scripts\Scirptables\CharacterAnimatorConfig.cs" />
+    <Compile Include="Assets\_project\scripts\Behaviours\AnimatorIKListener.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\_project\fonts\UFL.txt" />
