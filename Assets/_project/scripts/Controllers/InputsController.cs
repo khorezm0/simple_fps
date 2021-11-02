@@ -6,11 +6,15 @@ public class InputsController : MonoBehaviour
 {
     public Vector2 move;
     public Vector2 look;
-    public float fire;//Trigger
+
+    public float fire;
     public float reload;
     public float interact;
     public float jump;
     public float strafe;
+
+    public int weapon;
+    public Vector2 scroll;
 
     public void OnMove(InputValue value)
     {
@@ -45,5 +49,15 @@ public class InputsController : MonoBehaviour
     public void OnStrafe(InputValue context)
     {
         strafe = context.Get<float>();
+    }
+
+    public void OnWeapon(InputValue context)
+    {
+        weapon = Mathf.RoundToInt(context.Get<float>());
+    }
+
+    public void OnScroll(InputValue context)
+    {
+        scroll = context.Get<Vector2>();
     }
 }

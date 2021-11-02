@@ -73,6 +73,22 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Weapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""12698b76-a0b6-4b7b-8db1-2f7d4b95be69"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""932774fb-7c95-4f02-a7c7-607924da08b9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -339,6 +355,61 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                     ""action"": ""Strafe"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3902ca69-a406-4580-8dd3-8f40fe3449f1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b01efbde-c06d-4ca7-8c1c-7f405685c46d"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d28c25e6-96b4-4ac1-ac7f-a0d42f0d9604"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df618ea9-85b3-4865-9fbb-5d253653c602"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""275b385b-524e-44a1-8f84-6e56761a81a0"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +425,8 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         m_MainMap_Reload = m_MainMap.FindAction("Reload", throwIfNotFound: true);
         m_MainMap_Jump = m_MainMap.FindAction("Jump", throwIfNotFound: true);
         m_MainMap_Strafe = m_MainMap.FindAction("Strafe", throwIfNotFound: true);
+        m_MainMap_Weapon = m_MainMap.FindAction("Weapon", throwIfNotFound: true);
+        m_MainMap_Scroll = m_MainMap.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -410,6 +483,8 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_MainMap_Reload;
     private readonly InputAction m_MainMap_Jump;
     private readonly InputAction m_MainMap_Strafe;
+    private readonly InputAction m_MainMap_Weapon;
+    private readonly InputAction m_MainMap_Scroll;
     public struct MainMapActions
     {
         private @DefaultInputs m_Wrapper;
@@ -421,6 +496,8 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         public InputAction @Reload => m_Wrapper.m_MainMap_Reload;
         public InputAction @Jump => m_Wrapper.m_MainMap_Jump;
         public InputAction @Strafe => m_Wrapper.m_MainMap_Strafe;
+        public InputAction @Weapon => m_Wrapper.m_MainMap_Weapon;
+        public InputAction @Scroll => m_Wrapper.m_MainMap_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_MainMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -451,6 +528,12 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                 @Strafe.started -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
                 @Strafe.performed -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
                 @Strafe.canceled -= m_Wrapper.m_MainMapActionsCallbackInterface.OnStrafe;
+                @Weapon.started -= m_Wrapper.m_MainMapActionsCallbackInterface.OnWeapon;
+                @Weapon.performed -= m_Wrapper.m_MainMapActionsCallbackInterface.OnWeapon;
+                @Weapon.canceled -= m_Wrapper.m_MainMapActionsCallbackInterface.OnWeapon;
+                @Scroll.started -= m_Wrapper.m_MainMapActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_MainMapActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_MainMapActionsCallbackInterface.OnScroll;
             }
             m_Wrapper.m_MainMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -476,6 +559,12 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
                 @Strafe.started += instance.OnStrafe;
                 @Strafe.performed += instance.OnStrafe;
                 @Strafe.canceled += instance.OnStrafe;
+                @Weapon.started += instance.OnWeapon;
+                @Weapon.performed += instance.OnWeapon;
+                @Weapon.canceled += instance.OnWeapon;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
             }
         }
     }
@@ -489,5 +578,7 @@ public class @DefaultInputs : IInputActionCollection, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnStrafe(InputAction.CallbackContext context);
+        void OnWeapon(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }
