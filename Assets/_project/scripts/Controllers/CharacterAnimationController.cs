@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Test анимаций
+
 public class CharacterAnimationController : MonoBehaviour
 {
     public Transform HeadRoot;
@@ -9,7 +11,6 @@ public class CharacterAnimationController : MonoBehaviour
     public Animator Animator;
     public CharacterAnimatorConfig Config;
 
-    //Test
     public Transform IKLeft, IKRight;
 
     private AnimatorIKListener _ikListener;
@@ -17,14 +18,17 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        _ikListener = Animator.GetComponent<AnimatorIKListener>();
-        if (_ikListener == null)
+        if (Animator)
         {
-            _ikListener = Animator.gameObject.AddComponent<AnimatorIKListener>();
-        }
-        if (gameObject != Animator.gameObject)
-        {
-            _ikListener.OnIkPass += OnAnimatorIK;
+            _ikListener = Animator.GetComponent<AnimatorIKListener>();
+            if (_ikListener == null)
+            {
+                _ikListener = Animator.gameObject.AddComponent<AnimatorIKListener>();
+            }
+            if (gameObject != Animator.gameObject)
+            {
+                _ikListener.OnIkPass += OnAnimatorIK;
+            }
         }
     }
 
@@ -57,7 +61,7 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _ikListener.OnIkPass -= OnAnimatorIK;
+        if (_ikListener) _ikListener.OnIkPass -= OnAnimatorIK;
     }
 
     private void Log(object message)
