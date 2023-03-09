@@ -15,7 +15,7 @@ Game features
 - Menu: Pause, Graphics settings, Inputs settings, Audio settings  (currently not implemented)
 
 Goal 
-- Trying my best to make great looking code :)
+- Trying my best to make good looking code :)
 
 # Dependencies
 - Unity 2020
